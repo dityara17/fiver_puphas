@@ -26,7 +26,7 @@ $phoneNumber = "0898721728172";
 <div class="container">
     <div class="main">
         <div class="title" id="title">
-            <h2>Wanna Travel To Jepara?</h2>
+            <h2>Wanna Travel To Jepara??</h2>
         </div>
         <div class="img">
             <img src="images/product1.png" alt="Product 1">
