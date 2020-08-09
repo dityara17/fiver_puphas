@@ -1,7 +1,9 @@
 <?php
 
 session_start();
-define('base_url', 'http://localhost:8080/fiverr_pizza/');
+// here set time zone
+date_default_timezone_set("Asia/Bangkok");
+error_reporting(0);
 
 class MainClass
 {
@@ -49,13 +51,18 @@ class MainClass
 
     function storeTransaction($pv, $name, $address, $phone, $message)
     {
-        $stmt = $this->db->prepare("INSERT INTO `transaction`( `pv_id`, `name`, `address`, `phone`, `message`) VALUES (?,?,?,?,?)");
-        $stmt->execute([$pv, $name, $address, $phone, $message]);
+        $date = date('Y-m-d h:i:s');
+        $stmt = $this->db->prepare("INSERT INTO `transaction`( `pv_id`, `name`, `address`, `phone`, `message`,date) VALUES (?,?,?,?,?,?)");
+        $stmt->execute([$pv, $name, $address, $phone, $message,$date]);
     }
 
     function getNotify()
     {
-        return $this->db->query("select * from transaction limit 0,9 ")->fetchAll(PDO::FETCH_ASSOC);
+        return $this->db->query("select *, t.name as tname, pv.name as pvname 
+            from transaction t 
+            join   product_varians pv on t.pv_id =pv.id_pv
+            order by id desc
+            limit 0,9 ")->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function time_elapsed_string($datetime, $full = false)

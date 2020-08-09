@@ -29,7 +29,7 @@ $phoneNumber = "0898721728172";
             <h2>Wanna Travel To Jepara??</h2>
         </div>
         <div class="img">
-            <img src="images/product1.png" alt="Product 1">
+            <img src="images/product1.png" alt="Product 1" style="width: 100%;height: 400px">
         </div>
         <p>
             She wondered if the note had reached him. She scolded herself for not handing it to him in person. She
@@ -52,14 +52,27 @@ $phoneNumber = "0898721728172";
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam atque autem cumque cupiditate dolor
             ducimus earum ex ipsum, iure minima nihil placeat rerum saepe similique sunt vitae voluptate voluptatem.
         </p>
+        <div class="sub-title">
+            <h3>New Arrival</h3>
+        </div>
+        <video src="videos/play-1.mp4" autoplay controls>
+
+        </video>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci aliquam dolore iure nihil
+            officiis quam, quisquam sapiente tempora! A cupiditate dolorum eveniet libero modi pariatur qui suscipit
+            ullam voluptate!
+        </p>
         <div class="form" id="form" style="margin-bottom: 40px;">
             <form action="" method="post">
                 <div class="sub-title">
                     <h3>Chose Quantity Product</h3>
+                </div>
                     <div class="form-check" style="margin-bottom: 20px;">
                         <?php foreach ($productVariation as $product): ?>
-                            <input type="radio" name="varian" class="form-check-input" value="<?= $product['id_pv'] ?>">
-                            <label for="">
+                            <input onclick="setBold(<?= $product['id_pv'] ?>)" id="cProduk<?= $product['id_pv'] ?>"
+                                   type="radio" name="varian" class="form-check-input" value="<?= $product['id_pv'] ?>">
+                            <label class="id_pv_c" for="cProduk<?= $product['id_pv'] ?>">
                                 <?= $product['name'] ?>
                             </label>
                             <br>
@@ -67,22 +80,23 @@ $phoneNumber = "0898721728172";
                     </div>
                     <div class="form-group">
                         <label for="">Name</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" class="form-control" required placeholder="Your Name">
                     </div>
                     <div class="form-group">
                         <label for="">Phone</label>
-                        <input type="number" name="phone" class="form-control" required>
+                        <input type="number" name="phone" class="form-control" required placeholder="0*********">
                     </div>
                     <div class="form-group">
                         <label for="">Address</label>
-                        <textarea name="address" id="" class="form-control" required rows="4"></textarea>
+                        <textarea name="address" id="" class="form-control" required rows="4" placeholder="Your address"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Message</label>
-                        <textarea name="message" id="" class="form-control" rows="4"></textarea>
+                        <textarea name="message" id="" class="form-control" rows="4" placeholder="Any message for me?"></textarea>
                     </div>
-                    <button name="submit" style="width: 300px;" class="btn btn-danger">Order</button>
-                </div>
+                    <div class="text-center">
+                        <button name="submit" style="width: 400px;padding: 20px" class="btn btn-danger">Order</button>
+                    </div>
             </form>
 
             <?php
@@ -131,12 +145,16 @@ $phoneNumber = "0898721728172";
                                 <?php foreach ($notify as $item): ?>
                                     <tr>
                                         <td>
-                                            <p><span class="notif-badge"></span><?php $target = $item['phone'];
-                                                $count = strlen($item['phone']) - 7;
+                                            <p><span class="notif-badge"></span><?php
+                                                $target = $item['phone'];
+                                                $targetN = $item['tname'];
+                                                $count = strlen($item['phone']) - 3;
                                                 $output = substr_replace($target, str_repeat('*', $count), 4, $count);
-                                                echo $output; ?></p>
+                                                $outputN = substr($targetN, 0, strlen($targetN) - (strlen($targetN) - 1));
+                                                echo $outputN . "* [" . $output . "]"; ?>
+                                            </p>
                                             <p>
-                                                <span class="notif-date"><?php echo $use->time_elapsed_string($item['date']) ?></span><?= $item['name'] ?>
+                                                <span class="notif-date"><?php echo $use->time_elapsed_string($item['date']) ?></span>Buy-<?= $item['name'] ?>
                                             </p>
                                         </td>
                                     </tr>
@@ -163,7 +181,11 @@ $phoneNumber = "0898721728172";
         </a>
     </div>
 </div>
+
+<div class="none" style="display: none">
+
 </div>
+
 <div class="footer after">
     <a href="#form" style="color: white">
         <p style="width: 100%">
@@ -185,15 +207,23 @@ $phoneNumber = "0898721728172";
         crossorigin="anonymous"></script>
 <script>
     $(document).scroll(function () {
-        var y = $(this).scrollTop();
-        if (y > 200) {
-            $('.after').show();
-        } else {
-            $('.after').hide(100);
-        }
-
+        // var y = $(this).scrollTop();
+        // if (y > 200) {
+        //     $('.after').show();
+        // } else {
+        //     $('.after').hide(100);
+        // }
         // notify
     });
+
+    function setBold(idPv) {
+        $(".id_pv_c").css("font-weight", "normal");
+        $(".id_pv_c").css("color", "#333");
+        var label = $("label[for='cProduk"+idPv+"']")
+        label.css("font-weight", "bold");
+        label.css("color", "red");
+
+    }
 </script>
 </body>
 </html>

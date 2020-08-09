@@ -19,8 +19,18 @@ $productVariation = $use->getPv();
 </head>
 <body>
 <div class="container">
-    <div class="main">
-        <h3>Thanks for your order</h3>
+    <div class="main text-center">
+        <div class="box" style="border: 5px dotted darkred ">
+            <span class="" style="padding: 40px;color: #0f7933;border-radius: 50%;font-size: 41px">
+                <i class="fas fa-check-circle"></i>
+            </span> <br>
+            <h3 style="font-size: 2.5em" class="text-center">
+                Thanks for your order
+            </h3>
+            <div class="alert  text-center">
+                We will process your order ASAP
+            </div>
+        </div>
     </div>
 </div>
 
